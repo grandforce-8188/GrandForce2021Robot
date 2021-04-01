@@ -20,6 +20,7 @@ import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Turret;
 
 import java.io.IOException;
+import java.time.Instant;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -80,7 +81,11 @@ public class Robot extends TimedRobot {
   public void autonomousInit()
   {
     String SelectedAuto = UpdateDashboard.SelectedAuto;
-
+    try {
+      Thread.sleep(1000l);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     switch (SelectedAuto)
     {
       case "Comp":
