@@ -10,8 +10,8 @@ public class UpdateDashboard
 {
     private static final String CompetitionAuto = "Comp";
 
-    private final static String GalacticSearch1Blue = "Glactic Search Path 1 Blue";
-    private final static String GalacticSearch1Red = "Glactic Search Path 1 Red";
+    private final static String GalacticSearch1Blue = "Galactic Search Path 1 Blue";
+    private final static String GalacticSearch1Red = "Galactic Search Path 1 Red";
     private final static String GalacticSearch2Blue = "Galactic Search Path 2 Blue";
     private final static String GalacticSearch2Red = "Galactic Search Path 2 Red";
   

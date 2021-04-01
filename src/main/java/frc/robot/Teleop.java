@@ -165,7 +165,7 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     {
       SpinOutput.RunOutput(0);
        SpinHopper.RunHopper(0);
-    }
+    } 
     else if(ShooterState == 0.0 && RightTrigger == 0.0)
     {
        SpinHopper.StopHopper();

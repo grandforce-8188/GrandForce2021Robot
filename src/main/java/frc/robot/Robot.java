@@ -10,13 +10,16 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Autonomous.Comp;
+import frc.robot.Autonomous.AutonomousEngine;
+import frc.robot.Autonomous.CommandHandler;
 import frc.robot.Commands.ShiftGears;
 import frc.robot.Commands.UseIntakePistons;
 import frc.robot.Periodic.Braking;
 import frc.robot.Periodic.UpdateDashboard;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Turret;
+
+import java.io.IOException;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -60,6 +63,7 @@ public class Robot extends TimedRobot {
   {
     Braking.MainBraking();
     UpdateDashboard.RunUpdateDashboard();
+    System.out.println(UpdateDashboard.SelectedAuto);
   }
 
   /**
@@ -73,14 +77,52 @@ public class Robot extends TimedRobot {
    * chooser code above as well.
    */
   @Override
-  public void autonomousInit() 
+  public void autonomousInit()
   {
     String SelectedAuto = UpdateDashboard.SelectedAuto;
 
-    if(SelectedAuto == "Comp")
+    switch (SelectedAuto)
     {
-      Comp.CompAuto();
+      case "Comp":
+        AutonomousEngine.initialize("Autonomous/Comp.json");
+        break;
+
+      case "Galactic Search Path 1 Blue" :
+        AutonomousEngine.initialize("Autonomous/GalacticSearchP1B.json");
+        break;
+
+      case  "Galactic Search Path 1 Red" :
+        AutonomousEngine.initialize("Autonomous/GalacticSearchP1R.json");
+        break;
+
+      case "Galactic Search Path 2 Blue" :
+        AutonomousEngine.initialize("Autonomous/GalacticSearchP2B.json");
+        break;
+
+      case "Galactic Search Path 2 Red" :
+        AutonomousEngine.initialize("Autonomous/GalacticSearchP2R.json");
+        break;
+
+      case "Barrel Racing":
+        AutonomousEngine.initialize("Autonomous/Barrel.json");
+        break;
+
+      case "Slalom" :
+        AutonomousEngine.initialize("Autonomous/Slalom.json");
+        break;
+
+      case "Bounce" :
+        AutonomousEngine.initialize("Autonomous/Bounce.json");
+        break;
     }
+
+    try {
+      String[] tableOfInstructions = AutonomousEngine.runEngine();
+      CommandHandler.handleCommands(tableOfInstructions);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
   }
 
   /** This function is called periodically during autonomous. */
@@ -92,7 +134,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit()
+  {
+
+  }
 
   /** This function is called periodically during operator control. */
   @Override
@@ -110,13 +155,16 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically when disabled. */
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic()
+  {}
 
   /** This function is called once when test mode is enabled. */
   @Override
-  public void testInit() {}
+  public void testInit()
+  {}
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic()
+  {}
 }
