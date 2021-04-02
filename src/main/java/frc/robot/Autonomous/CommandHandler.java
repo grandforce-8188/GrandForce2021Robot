@@ -29,8 +29,8 @@ public class CommandHandler
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        DrivetrainBot.left_motors.set(1);
-                        DrivetrainBot.right_motors.set(1);
+                        DrivetrainBot.left_motors.set(0);
+                        DrivetrainBot.right_motors.set(0);
                     }
                     break;
 
@@ -44,19 +44,19 @@ public class CommandHandler
 
                 case "reverse":
                     System.out.println("Reversing");
-                    Long reverseTime = (long)parameter*20;
+                    Long reverseTime = (long)parameter*20; //Just a guess, has not been calibrated. Time is in milliseconds
                     System.out.println("Driving");
                     for(double ii = 0; ii<parameter; ii++)
                     {
-                        DrivetrainBot.left_motors.set(1);
-                        DrivetrainBot.right_motors.set(1);
+                        DrivetrainBot.left_motors.set(-1);
+                        DrivetrainBot.right_motors.set(-1);
                         try {
                             Thread.sleep(reverseTime);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        DrivetrainBot.left_motors.set(1);
-                        DrivetrainBot.right_motors.set(1);
+                        DrivetrainBot.left_motors.set(0);
+                        DrivetrainBot.right_motors.set(0);
                     }
                     break;
 
