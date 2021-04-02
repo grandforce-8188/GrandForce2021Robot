@@ -1,6 +1,7 @@
 package frc.robot.Autonomous;
 
 import frc.robot.Commands.*;
+import frc.robot.Subsystems.DrivetrainBot;
 import frc.robot.Subsystems.Limelight;
 
 public class CommandHandler
@@ -13,12 +14,24 @@ public class CommandHandler
         {
             String[] instruction = tableOfInstructions[i].split("/"); //Split instruction into the command to be run, and the parameter to run the command with,
             String command = instruction[0]; //Command
-            Double parameter = Double.valueOf(instruction[1]); //Parameter
-
+            double parameter = Double.parseDouble(instruction[1]); //Parameter
             switch(command) //This is the switch logic structure, used in this instance because it's neater than an if statement.
             {
                 case "drive": //To add a command here just copy what you see, case "command":
+                    Long driveTime = (long)parameter*20;
                     System.out.println("Driving");
+                    for(double ii = 0; ii<parameter; ii++)
+                    {
+                        DrivetrainBot.left_motors.set(1);
+                        DrivetrainBot.right_motors.set(1);
+                        try {
+                            Thread.sleep(driveTime);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        DrivetrainBot.left_motors.set(1);
+                        DrivetrainBot.right_motors.set(1);
+                    }
                     break;
 
                 case "turnL":
@@ -31,6 +44,20 @@ public class CommandHandler
 
                 case "reverse":
                     System.out.println("Reversing");
+                    Long reverseTime = (long)parameter*20;
+                    System.out.println("Driving");
+                    for(double ii = 0; ii<parameter; ii++)
+                    {
+                        DrivetrainBot.left_motors.set(1);
+                        DrivetrainBot.right_motors.set(1);
+                        try {
+                            Thread.sleep(reverseTime);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        DrivetrainBot.left_motors.set(1);
+                        DrivetrainBot.right_motors.set(1);
+                    }
                     break;
 
                 case "shoot":
