@@ -1,5 +1,8 @@
 package frc.robot.Autonomous;
 
+import frc.robot.Commands.*;
+import frc.robot.Subsystems.Limelight;
+
 public class CommandHandler
 {
     //This is an example of the command handler. In this new way of doing autonomous the engine does all the reading of JSON files and you then pass the resulting array into the command
@@ -32,10 +35,33 @@ public class CommandHandler
 
                 case "shoot":
                     System.out.println("Shooting");
+                    Limelight.LimelightOn();
+                    AimShooter.AimMain(Limelight.LimelightX, Limelight.DesiredRPM);
+                    while(AimShooter.ShooterReady == false)
+                    {
+
+                    }
+                    SpinHopper.RunHopper(0);
+                    SpinOutput.RunOutput(0);
+                    try { //This may or may not work, it depends on whether or not motors spin while the thread is put to sleep, not able to test at this point -Dimitri.
+                        Thread.sleep(10000l);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SpinHopper.StopHopper();
+                    SpinIntake.StopIntake();
+                    FireShooter.StopShooter();
+                    Limelight.LimelightOff();
                     break;
 
                 case "intake":
                     System.out.println("Intaking");
+                    SpinIntake.RunIntake(0);
+                    try {
+                        Thread.sleep(1000l);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case "drive+intake":

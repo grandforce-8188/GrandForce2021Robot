@@ -8,7 +8,8 @@ public class Limelight
 {
     public static Double LimelightX = 0.0;
     public static Double LimelightY = 0.0;
-    public static Double LimelightHasTarget = 0.0;    
+    public static Double LimelightHasTarget = 0.0;
+    public static Integer DesiredRPM = 4000;
 
     static NetworkTable NetTable = NetworkTableInstance.getDefault().getTable("limelight");
     static NetworkTableEntry LimelightLED = NetTable.getEntry("ledMode");
