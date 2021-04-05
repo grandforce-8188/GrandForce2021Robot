@@ -2,7 +2,7 @@ package frc.robot.Scripts.Auto;
 
 public class AutoScriptComp
 {
-    public static String script = "{\n" +
+    public static final String script = "{\n" +
             " \"instructions\":[\n" +
             "{\n" +
             "  \"instruction\": \"reverse\",\n" +
