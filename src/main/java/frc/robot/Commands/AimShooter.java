@@ -1,7 +1,6 @@
 package frc.robot.Commands;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Teleop;
 import frc.robot.Functions.GetRPMtalonFX;
 import frc.robot.Subsystems.Shooter;
@@ -10,7 +9,6 @@ public class AimShooter
 {
     static Integer max_shooter_rpm = Teleop.DesiredRPM;
     static WPI_TalonFX shooter_right = Shooter.shooter_right;
-    static WPI_TalonFX shooter_left = Shooter.shooter_left;
 
 public static void AimMain(Double LimelightX, double RequiredRPM)
 {
@@ -19,9 +17,20 @@ AimTurret(LimelightX, RequiredRPM);
 
 public static void AimTurret(Double LimelightX, double RequiredRPM)
 {
-    if(LimelightX == 0)
+    Double limelightOffset = 0.0;
+    if(LimelightX.equals(limelightOffset))
     {
         RegulateRPM(RequiredRPM);
+    }
+    else if(LimelightX < 0)
+    {
+        SpinTurret.RotateTurret(1);
+        AimMain(LimelightX, RequiredRPM);
+    }
+    else if(LimelightX > 0)
+    {
+        SpinTurret.RotateTurret(0);
+        AimMain(LimelightX, RequiredRPM);
     }
 }
 
