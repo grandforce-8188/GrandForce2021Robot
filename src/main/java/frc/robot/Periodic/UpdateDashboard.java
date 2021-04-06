@@ -24,6 +24,13 @@ public class UpdateDashboard
     public static String SelectedAuto;
     public static String ShooterAtRPM = "Shooter not at RPM";
 
+    public static Integer ShooterRPM = 0;
+
+    public static void DashboardInit()
+    {
+        SmartDashboard.putNumber("Desired Shooter RPM", ShooterRPM);
+    }
+
     public static void RunUpdateDashboard() 
     {
         auto_chooser.setDefaultOption("Competition Auto", CompetitionAuto);
@@ -45,8 +52,7 @@ public class UpdateDashboard
             ShooterAtRPM = "Shooter is not at RPM";
         }
 
-        SmartDashboard.putData("Automouse Options", auto_chooser);
+        SmartDashboard.putData("Autonomous Options", auto_chooser);
         SelectedAuto = auto_chooser.getSelected();
-        SmartDashboard.putNumber("Desired Shooter RPM", Teleop.DesiredRPM);
     }
 }

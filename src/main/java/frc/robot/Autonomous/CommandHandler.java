@@ -18,7 +18,7 @@ public class CommandHandler
             switch(command) //This is the switch logic structure, used in this instance because it's neater than an if statement.
             {
                 case "drive": //To add a command here just copy what you see, case "command":
-                    Long driveTime = (long)parameter*20;
+                    Long driveTime = (long)parameter*20; //Just a guess, has not been calibrated. Time is in milliseconds
                     System.out.println("Driving");
                     for(double ii = 0; ii<parameter; ii++)
                     {

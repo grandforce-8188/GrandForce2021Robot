@@ -5,6 +5,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.AimShooter;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.FireShooter;
@@ -15,6 +16,7 @@ import frc.robot.Commands.SpinOutput;
 import frc.robot.Commands.SpinWinch;
 import frc.robot.Commands.UseIntakePistons;
 import frc.robot.Periodic.Braking;
+import frc.robot.Periodic.UpdateDashboard;
 import frc.robot.Subsystems.DrivetrainBot;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Turret;
@@ -23,7 +25,7 @@ import frc.robot.Subsystems.Turret;
 
 public class Teleop 
 {
-public static Integer DesiredRPM = Robot.DesiredRPM; // CHANGE ME TO DESIRED RPM, 0-6000
+public static Integer DesiredRPM = (int) SmartDashboard.getNumber("Desired Shooter RPM", 0.0); // CHANGE ME TO DESIRED RPM, 0-6000
 
 static XboxController DriveTrainController = Robot.DriveTrainController;
 static Joystick DriveTrainJoystick = Robot.DrivetrainJoystick;
