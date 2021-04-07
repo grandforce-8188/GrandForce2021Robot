@@ -145,6 +145,8 @@ public class Robot extends TimedRobot {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    commandHandler.handleCommands((String[]) commands.toArray());
   }
 
   /** This function is called periodically during autonomous. */
