@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() 
   {
+    UpdateDashboard.DashboardInit();
     ShiftGears.ShiftDriveGears(0);
 
     UseIntakePistons.ResetPiston();
@@ -64,7 +65,6 @@ public class Robot extends TimedRobot {
   {
     Braking.MainBraking();
     UpdateDashboard.RunUpdateDashboard();
-    System.out.println(UpdateDashboard.SelectedAuto);
   }
 
   /**
@@ -81,11 +81,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit()
   {
     String SelectedAuto = UpdateDashboard.SelectedAuto;
-    try {
-      Thread.sleep(1000l);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
     switch (SelectedAuto)
     {
       case "Comp":

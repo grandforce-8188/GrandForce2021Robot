@@ -52,11 +52,6 @@ static Joystick DriveTrainJoystick = Robot.DrivetrainJoystick;
        Braking.EnableBraking();
     }
 
-
-   
-
-
-
 DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveTrainJoystick.getTwist(), 3), true);
 
 
