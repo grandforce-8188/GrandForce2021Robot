@@ -10,17 +10,20 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Autonomous.AutonomousEngine;
-import frc.robot.Autonomous.CommandHandler;
+import frc.robot.Autonomous.GrandForce_AutoEngine;
+import frc.robot.Autonomous.GrandForce_AutoEngineCommandHandler;
 import frc.robot.Commands.ShiftGears;
 import frc.robot.Commands.UseIntakePistons;
 import frc.robot.Periodic.Braking;
+import frc.robot.ScriptCommands.*;
 import frc.robot.Periodic.UpdateDashboard;
+import frc.robot.Scripts.Auto.*;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Turret;
 
 import java.io.IOException;
-import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -81,48 +84,67 @@ public class Robot extends TimedRobot {
   public void autonomousInit()
   {
     String SelectedAuto = UpdateDashboard.SelectedAuto;
+    GrandForce_AutoEngine autoEngine = new GrandForce_AutoEngine();
+
+    GrandForce_AutoEngineCommandHandler commandHandler = new GrandForce_AutoEngineCommandHandler();
+
+    driveCommand drive = new driveCommand();
+    driveAndintakeCommand driveAndIntake = new driveAndintakeCommand();
+    reverseCommand reverse = new reverseCommand();
+    shootCommand shoot = new shootCommand();
+    turnLCommand turnL = new turnLCommand();
+    turnRCommand turnR = new turnRCommand();
+
+    commandHandler.add(drive);
+    commandHandler.add(driveAndIntake);
+    commandHandler.add(reverse);
+    commandHandler.add(shoot);
+    commandHandler.add(turnL);
+    commandHandler.add(turnR);
+
+    ArrayList<String> commands = new ArrayList<String>();
+    String script = "";
+
     switch (SelectedAuto)
     {
       case "Comp":
-        AutonomousEngine.initialize("Autonomous/Comp.json");
+        script = AutoScriptComp.script;
         break;
 
       case "Galactic Search Path 1 Blue" :
-        AutonomousEngine.initialize("Autonomous/GalacticSearchP1B.json");
+        script = AutoScriptGSB1.script;
         break;
 
       case  "Galactic Search Path 1 Red" :
-        AutonomousEngine.initialize("Autonomous/GalacticSearchP1R.json");
+        script = AutoScriptGSR1.script;
         break;
 
       case "Galactic Search Path 2 Blue" :
-        AutonomousEngine.initialize("Autonomous/GalacticSearchP2B.json");
+        script = AutoScriptGSB2.script;
         break;
 
       case "Galactic Search Path 2 Red" :
-        AutonomousEngine.initialize("Autonomous/GalacticSearchP2R.json");
+        script = AutoScriptGSR2.script;
         break;
 
       case "Barrel Racing":
-        AutonomousEngine.initialize("Autonomous/Barrel.json");
+        script = AutoScriptNavBarrel.script;
         break;
 
       case "Slalom" :
-        AutonomousEngine.initialize("Autonomous/Slalom.json");
+        script = AutoScriptNavSlalom.script;
         break;
 
       case "Bounce" :
-        AutonomousEngine.initialize("Autonomous/Bounce.json");
+        script = AutoScriptNavBounce.script;
         break;
     }
 
     try {
-      String[] tableOfInstructions = AutonomousEngine.runEngine();
-      CommandHandler.handleCommands(tableOfInstructions);
+      commands = (ArrayList<String>) Arrays.asList(autoEngine.runEngine(script));
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   /** This function is called periodically during autonomous. */
