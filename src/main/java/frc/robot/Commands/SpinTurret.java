@@ -16,11 +16,26 @@ public static void RotateTurret(Integer LeftOrRight)
     
     if(LeftOrRight==0)
     {
-        turret_motor.set(-0.125);
+        if(Turret.turret_motor.getSensorCollection().getPulseWidthPosition() > -1450)
+        {
+            turret_motor.set(-0.0625);
+        }
+        else
+        {
+            turret_motor.set(0);
+        }
+        
     }
     else if(LeftOrRight == 1)
     {
-        turret_motor.set(0.125);
+        if(Turret.turret_motor.getSensorCollection().getPulseWidthPosition() < 3440)
+        {
+            turret_motor.set(0.0625);
+        }
+        else
+        {
+            turret_motor.set(0);
+        }
     }
 }    
 
