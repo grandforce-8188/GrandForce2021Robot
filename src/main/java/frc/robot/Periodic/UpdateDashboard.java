@@ -24,7 +24,7 @@ public class UpdateDashboard
     public static String SelectedAuto;
     public static String ShooterAtRPM = "Shooter not at RPM";
 
-    public static Integer ShooterRPM = 0;
+    public static Double ShooterRPM = 6000.0;
 
     public static void DashboardInit()
     {

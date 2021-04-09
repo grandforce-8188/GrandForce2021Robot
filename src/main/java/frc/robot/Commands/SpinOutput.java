@@ -20,12 +20,12 @@ public class SpinOutput {
         if(Reverse == 0)
         {
             output_motor.set(1);
-            output_slave.set(1);
+            output_slave.set(-1);
         }
         else if(Reverse == 1)
         {
             output_motor.set(-1);
-            output_slave.set(-1);
+            output_slave.set(1);
             // Hello Jacob
             // you suck
         }

@@ -19,6 +19,7 @@ import frc.robot.ScriptCommands.*;
 import frc.robot.Periodic.UpdateDashboard;
 import frc.robot.Scripts.Auto.*;
 import frc.robot.Subsystems.Limelight;
+import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Turret;
 
 import java.io.IOException;
@@ -54,6 +55,9 @@ public class Robot extends TimedRobot {
     Turret.turret_motor.setNeutralMode(NeutralMode.Brake);
 
     RobotCompressor.setClosedLoopControl(true);
+
+    Shooter.shooter_left.setNeutralMode(NeutralMode.Coast);
+    Shooter.shooter_right.setNeutralMode(NeutralMode.Coast);
     }
 
   /**
@@ -68,6 +72,7 @@ public class Robot extends TimedRobot {
   {
     Braking.MainBraking();
     UpdateDashboard.RunUpdateDashboard();
+    System.out.println(Turret.turret_motor.getSensorCollection().getPulseWidthPosition());
   }
 
   /**

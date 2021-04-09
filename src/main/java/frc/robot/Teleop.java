@@ -52,7 +52,7 @@ static Joystick DriveTrainJoystick = Robot.DrivetrainJoystick;
        Braking.EnableBraking();
     }
 
-DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveTrainJoystick.getTwist(), 3), true);
+DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveTrainJoystick.getTwist(), 3)*2, true);
 
 
     if(DriveTrainJoystick.getRawButton(1) == true)
@@ -118,8 +118,8 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     Boolean XboxAPressed = DriveTrainController.getAButton();
     Boolean XboxARelease = DriveTrainController.getAButtonReleased();
 
-    Double RightTrigger = DriveTrainController.getTriggerAxis(Hand.kRight);
-    Double LeftTrigger = DriveTrainController.getTriggerAxis(Hand.kLeft);
+    Double RightTrigger = DriveTrainController.getTriggerAxis(Hand.kRight)/64;
+    Double LeftTrigger = DriveTrainController.getTriggerAxis(Hand.kLeft)/64;
 
     Boolean XboxLeftBumperPressed = DriveTrainController.getBumper(Hand.kLeft);
     Boolean XboxLeftBumperReleased = DriveTrainController.getBumperReleased(Hand.kLeft);
@@ -139,7 +139,7 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     if(XboxXPressed == true)
     {
        //Limelight.LimelightOn();
-       FireShooter.SpinShooter(6000, 1);//Robot.DesiredRPM/6000, 1);
+       FireShooter.SpinShooter(DesiredRPM, 1);//Robot.DesiredRPM/6000, 1);
     }
     else if(XboxXReleased == true)
     {
@@ -148,13 +148,15 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
 
     if(XboxAPressed == true)
     {
-       Limelight.LimelightOn();
-       AimShooter.AimMain(Limelight.LimelightX, DesiredRPM);
+      SpinHopper.RunHopper(1);
+      //  Spin.LimelightOn();
+      //  AimShooter.AimMain(Limelight.LimelightX, DesiredRPM);
     }
     else if(XboxARelease == true)
     {
-       Limelight.LimelightOff();
-       FireShooter.StopShooter();
+      SpinHopper.StopHopper();
+      //  Limelight.LimelightOff();
+      //  FireShooter.StopShooter();
     }
 
 
