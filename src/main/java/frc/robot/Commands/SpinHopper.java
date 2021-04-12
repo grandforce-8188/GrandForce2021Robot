@@ -16,11 +16,11 @@ public class SpinHopper
     {
         if(Reverse == 0)
         {
-            hopper_motor.set(1);
+            hopper_motor.set(-0.5);
         }
         else if(Reverse == 1)
         {
-            hopper_motor.set(-1);
+            hopper_motor.set(0.5);
         }
     }
 

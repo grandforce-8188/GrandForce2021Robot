@@ -14,6 +14,7 @@ import frc.robot.Autonomous.GrandForce_AutoEngine;
 import frc.robot.Autonomous.GrandForce_AutoEngineCommandHandler;
 import frc.robot.Commands.ShiftGears;
 import frc.robot.Commands.UseIntakePistons;
+import frc.robot.Functions.GetRPMtalonFX;
 import frc.robot.Periodic.Braking;
 import frc.robot.ScriptCommands.*;
 import frc.robot.Periodic.UpdateDashboard;
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() 
   {
+    Limelight.LimelightOn();
     UpdateDashboard.DashboardInit();
     ShiftGears.ShiftDriveGears(0);
 
@@ -72,7 +74,6 @@ public class Robot extends TimedRobot {
   {
     Braking.MainBraking();
     UpdateDashboard.RunUpdateDashboard();
-    System.out.println(Turret.turret_motor.getSensorCollection().getPulseWidthPosition());
   }
 
   /**

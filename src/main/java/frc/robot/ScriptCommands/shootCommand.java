@@ -12,11 +12,8 @@ public class shootCommand extends GrandForce_AutoEngineCommand
     public void run(Double parameter) {
         System.out.println("Shooting");
         Limelight.LimelightOn();
-        AimShooter.AimMain(Limelight.LimelightX, Limelight.DesiredRPM);
-        while(AimShooter.ShooterReady == false)
-        {
+        AimShooter.AimMain(Limelight.DesiredRPM);
 
-        }
         SpinHopper.RunHopper(0);
         SpinOutput.RunOutput(0);
         try { //This may or may not work, it depends on whether or not motors spin while the thread is put to sleep, not able to test at this point -Dimitri.

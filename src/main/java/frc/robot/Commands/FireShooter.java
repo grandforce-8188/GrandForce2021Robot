@@ -21,13 +21,13 @@ public class FireShooter
 
         if(Reverse == 0)
         {
-            right_shooter.set(rpm);
-            left_shooter.set(-rpm);
+            right_shooter.set(-rpm/6000);
+            left_shooter.set(rpm/6000);
         }
         else
         {
-            right_shooter.set(-1);
-            left_shooter.set(1);
+            right_shooter.set(1);
+            left_shooter.set(-1);
         }
 
     } 

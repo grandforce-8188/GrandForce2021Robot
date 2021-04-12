@@ -19,17 +19,17 @@ import frc.robot.Periodic.Braking;
 import frc.robot.Periodic.UpdateDashboard;
 import frc.robot.Subsystems.DrivetrainBot;
 import frc.robot.Subsystems.Limelight;
+import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Turret;
 
 
 
 public class Teleop 
 {
-public static Integer DesiredRPM = (int) SmartDashboard.getNumber("Desired Shooter RPM", 0.0); // CHANGE ME TO DESIRED RPM, 0-6000
-
+public static Double DesiredRPM = 4000.0; //(int) SmartDashboard.getNumber("Desired Shooter RPM", 0.0); // CHANGE ME TO DESIRED RPM, 0-6000
 static XboxController DriveTrainController = Robot.DriveTrainController;
 static Joystick DriveTrainJoystick = Robot.DrivetrainJoystick;
- public static void TeleopCommands()
+public static void TeleopCommands()
  {
    JoystickControls();
    XboxControls();
@@ -52,7 +52,7 @@ static Joystick DriveTrainJoystick = Robot.DrivetrainJoystick;
        Braking.EnableBraking();
     }
 
-DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveTrainJoystick.getTwist(), 3)*2, true);
+DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveTrainJoystick.getTwist(), 3), true);
 
 
     if(DriveTrainJoystick.getRawButton(1) == true)
@@ -130,6 +130,8 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     Double XboxLeftJoystick = DriveTrainController.getX(Hand.kLeft);
     Double XboxRightJoystick = DriveTrainController.getY(Hand.kRight);
 
+    Boolean Reverse = false;
+
     if(XboxYPressed == true)
     {
       UseIntakePistons pistonBot = new UseIntakePistons();
@@ -139,7 +141,15 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     if(XboxXPressed == true)
     {
        //Limelight.LimelightOn();
-       FireShooter.SpinShooter(DesiredRPM, 1);//Robot.DesiredRPM/6000, 1);
+       System.out.println(DesiredRPM);
+       if(Reverse == true)
+       {
+           FireShooter.SpinShooter(DesiredRPM, 0);//Robot.DesiredRPM/6000, 1);
+       }
+       else if(Reverse == false)
+       {
+           FireShooter.SpinShooter(DesiredRPM, 1);//Robot.DesiredRPM/6000, 1);
+       }
     }
     else if(XboxXReleased == true)
     {
@@ -148,22 +158,30 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
 
     if(XboxAPressed == true)
     {
-      SpinHopper.RunHopper(1);
-      //  Spin.LimelightOn();
-      //  AimShooter.AimMain(Limelight.LimelightX, DesiredRPM);
+      Reverse = true;
+        //Limelight.LimelightOn();
+        Limelight.LimelightX = Limelight.tx.getDouble(0.0);
+        AimShooter.AimMain(DesiredRPM);
     }
     else if(XboxARelease == true)
     {
-      SpinHopper.StopHopper();
-      //  Limelight.LimelightOff();
-      //  FireShooter.StopShooter();
+        Reverse = false;
+        Limelight.LimelightOff();
+        FireShooter.StopShooter();
     }
 
 
-    if(AimShooter.ShooterReady == true && RightTrigger > 0 && ShooterState > 0)
+    if(RightTrigger > 0 && ShooterState > 0)
     {
-      SpinOutput.RunOutput(0);
-       SpinHopper.RunHopper(0);
+        if(AimShooter.AimMain(DesiredRPM) == true)
+        {
+            SpinHopper.RunHopper(0);
+            SpinOutput.RunOutput(0);
+        }
+        else
+        {
+
+        }
     } 
     else if(ShooterState == 0.0 && RightTrigger == 0.0)
     {
@@ -173,7 +191,14 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
 
     if(XboxLeftBumperPressed == true)
     {
-      SpinHopper.RunHopper(1);
+        if(Reverse == false)
+        {
+            SpinHopper.RunHopper(0);
+        }
+        else if(Reverse == true)
+        {
+            SpinHopper.RunHopper(1);
+        }
     }
     else if(XboxLeftBumperReleased == true)
     {
@@ -182,7 +207,14 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
 
     if(DriveTrainController.getRawButton(8))
     {
-      SpinOutput.RunOutput(0);
+        if(Reverse == false)
+        {
+            SpinOutput.RunOutput(0);
+        }
+        else if(Reverse == true)
+        {
+            SpinOutput.RunOutput(1);
+        }
     }
     else
     {
@@ -191,18 +223,17 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
 
     if(XboxRightBumperPressed == true)
     {
-       SpinIntake.RunIntake(0);
+        if(Reverse == false)
+        {
+            SpinIntake.RunIntake(0);
+        }
+        else if(Reverse == true)
+        {
+            SpinIntake.RunIntake(1);
+        }
     }
     else if(XboxRightBumperReleased == true)
     {
-       SpinIntake.RunIntake(1);
-    }
-
-    if(LeftTrigger > 0.0 && ReverseState >0)
-    {
-       FireShooter.SpinShooter(100, 1);
-       SpinOutput.RunOutput(1);
-       SpinHopper.RunHopper(1);
        SpinIntake.RunIntake(1);
     }
 
