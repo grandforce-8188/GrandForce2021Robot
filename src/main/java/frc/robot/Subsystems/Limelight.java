@@ -12,7 +12,6 @@ public class Limelight
     public static Double DesiredRPM = 4000.0;
 
     public static NetworkTable NetTable = NetworkTableInstance.getDefault().getTable("limelight");
-    public static NetworkTableEntry tx = NetTable.getEntry("tx");
     static NetworkTableEntry LimelightLED = NetTable.getEntry("ledMode");
 
     public static void LimelightOn() 

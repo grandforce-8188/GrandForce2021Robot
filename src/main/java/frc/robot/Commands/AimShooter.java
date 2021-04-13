@@ -1,11 +1,14 @@
 package frc.robot.Commands;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Turret;
 import frc.robot.Teleop;
 import frc.robot.Functions.GetRPMtalonFX;
 import frc.robot.Subsystems.Shooter;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class AimShooter {
     static Double max_shooter_rpm = Teleop.DesiredRPM;
@@ -14,36 +17,22 @@ public class AimShooter {
 
     public static boolean AimMain(Double RequiredRPM) {
         Limelight.LimelightOn();
-        try {
-            Thread.sleep(500l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(LimelightX);
-        while(LimelightX != 0)
+         try {
+             Thread.sleep(250l);
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
+        WPI_TalonSRX turret_motor = Turret.turret_motor;
+
+        if(Limelight.LimelightX == 15)
         {
-            LimelightX = Limelight.LimelightX;
-            System.out.println("LimeLightXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-            System.out.println(LimelightX);
-            if(LimelightX < 0)
-            {
-                System.out.println("turning 0");
-                SpinTurret.RotateTurret(0);
-            }
-            else if(LimelightX > 0)
-            {
-                System.out.println("turning 1");
-                SpinTurret.RotateTurret(1);
-            }
+            FireShooter.SpinShooter(RequiredRPM, 0);
+            return true;
         }
-        FireShooter.SpinShooter(RequiredRPM, 0);
-        try {
-            Thread.sleep(2500l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        else
+        {
+            return false;
         }
-        Limelight.LimelightOff();
-        return true;
     }
 
 //    public static void AimTurret(Double LimelightX, double RequiredRPM) {

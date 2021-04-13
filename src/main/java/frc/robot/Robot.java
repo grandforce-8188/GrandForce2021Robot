@@ -18,6 +18,7 @@ import frc.robot.Functions.GetRPMtalonFX;
 import frc.robot.Periodic.Braking;
 import frc.robot.ScriptCommands.*;
 import frc.robot.Periodic.UpdateDashboard;
+import frc.robot.Periodic.UpdateLimelight;
 import frc.robot.Scripts.Auto.*;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Shooter;
@@ -74,6 +75,7 @@ public class Robot extends TimedRobot {
   {
     Braking.MainBraking();
     UpdateDashboard.RunUpdateDashboard();
+    UpdateLimelight.UpdateLimelightX();
   }
 
   /**

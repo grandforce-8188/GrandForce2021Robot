@@ -110,7 +110,7 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
  {
     Boolean XboxYPressed = DriveTrainController.getYButtonPressed();
 
-    Boolean XboxBPressed = DriveTrainController.getBButton();
+    Boolean XboxB = DriveTrainController.getBButton();
 
     Boolean XboxXPressed = DriveTrainController.getXButton();
     Boolean XboxXReleased = DriveTrainController.getXButtonReleased();
@@ -118,8 +118,7 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     Boolean XboxAPressed = DriveTrainController.getAButton();
     Boolean XboxARelease = DriveTrainController.getAButtonReleased();
 
-    Double RightTrigger = DriveTrainController.getTriggerAxis(Hand.kRight)/64;
-    Double LeftTrigger = DriveTrainController.getTriggerAxis(Hand.kLeft)/64;
+    Double RightTrigger = DriveTrainController.getTriggerAxis(Hand.kRight);
 
     Boolean XboxLeftBumperPressed = DriveTrainController.getBumper(Hand.kLeft);
     Boolean XboxLeftBumperReleased = DriveTrainController.getBumperReleased(Hand.kLeft);
@@ -131,6 +130,15 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     Double XboxRightJoystick = DriveTrainController.getY(Hand.kRight);
 
     Boolean Reverse = false;
+
+    if(XboxB == true)
+    {
+        Reverse = true;
+    }
+    else
+    {
+        Reverse = false;
+    }
 
     if(XboxYPressed == true)
     {
@@ -148,7 +156,7 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
        }
        else if(Reverse == false)
        {
-           FireShooter.SpinShooter(DesiredRPM, 1);//Robot.DesiredRPM/6000, 1);
+           FireShooter.SpinShooter(6000, 1);//Robot.DesiredRPM/6000, 1);
        }
     }
     else if(XboxXReleased == true)
@@ -159,8 +167,7 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     if(XboxAPressed == true)
     {
       Reverse = true;
-        //Limelight.LimelightOn();
-        Limelight.LimelightX = Limelight.tx.getDouble(0.0);
+        Limelight.LimelightOn();
         AimShooter.AimMain(DesiredRPM);
     }
     else if(XboxARelease == true)
@@ -248,6 +255,5 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     }
 
     ShooterState = RightTrigger;
-    ReverseState = LeftTrigger;
  }
 }
