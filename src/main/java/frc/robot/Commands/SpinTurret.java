@@ -9,10 +9,9 @@ import frc.robot.Subsystems.Turret;
 public class SpinTurret 
 {
     /**
-     * Spin the turret left or right
-     * @param LeftOrRight 0 = spin turret left, 1 = spin turret right
+     * Spins the turret
      */
-public static void RotateTurret(Integer LeftOrRight)
+public static void RotateTurret()
 {
     WPI_TalonSRX turret_motor = Turret.turret_motor;
 

@@ -127,7 +127,7 @@ DrivetrainBot.Drivetrain.arcadeDrive(DriveTrainJoystick.getY(), Math.pow(-DriveT
     Boolean XboxRightBumperReleased = DriveTrainController.getBumperReleased(Hand.kRight);
 
     Double XboxLeftJoystick = DriveTrainController.getX(Hand.kLeft);
-    Double XboxRightJoystick = DriveTrainController.getY(Hand.kRight);
+    Double XboxRightJoystick = DriveTrainController.getX(Hand.kRight);
 
     Boolean Reverse = false;
 
