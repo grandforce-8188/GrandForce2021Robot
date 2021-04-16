@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Autonomous.GrandForce_AutoEngine;
 import frc.robot.Autonomous.GrandForce_AutoEngineCommandHandler;
 import frc.robot.Commands.ShiftGears;
@@ -54,13 +55,13 @@ public class Robot extends TimedRobot {
     UseIntakePistons.ResetPiston();
     ShiftGears.ResetShifters();
 
-    Limelight.LimelightOff();
     Turret.turret_motor.setNeutralMode(NeutralMode.Brake);
 
     RobotCompressor.setClosedLoopControl(true);
 
     Shooter.shooter_left.setNeutralMode(NeutralMode.Coast);
     Shooter.shooter_right.setNeutralMode(NeutralMode.Coast);
+
     }
 
   /**
@@ -76,6 +77,7 @@ public class Robot extends TimedRobot {
     Braking.MainBraking();
     UpdateDashboard.RunUpdateDashboard();
     UpdateLimelight.UpdateLimelightX();
+    Limelight.LimelightOn();
   }
 
   /**

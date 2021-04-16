@@ -15,8 +15,8 @@ public static void RotateTurret()
 {
     WPI_TalonSRX turret_motor = Turret.turret_motor;
 
-    PIDController pid = new PIDController(0.35, 0, 0.0018);
-    turret_motor.set(pid.calculate(Limelight.LimelightX, 10));
+    PIDController pid = new PIDController(0.35, 0, 0.0018, 0.005);
+    turret_motor.set(pid.calculate(Limelight.LimelightX, 0)); //Test
 }    
 
 /**

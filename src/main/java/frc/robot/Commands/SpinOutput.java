@@ -26,8 +26,6 @@ public class SpinOutput {
         {
             output_motor.set(-1);
             output_slave.set(1);
-            // Hello Jacob
-            // you suck
         }
 
     }

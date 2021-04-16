@@ -16,12 +16,6 @@ public class AimShooter {
     static Double LimelightX = Limelight.LimelightX;
 
     public static boolean AimMain(Double RequiredRPM) {
-        Limelight.LimelightOn();
-         try {
-             Thread.sleep(250l);
-         } catch (InterruptedException e) {
-             e.printStackTrace();
-         }
 
          SpinTurret.RotateTurret();
 
